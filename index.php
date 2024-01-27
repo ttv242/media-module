@@ -13,19 +13,16 @@
 
   <div id="container" class="container">
     <div class="wrapper">
-      <form action="" class="form">
+      <form action="./server.php" method="POST" class="form">
         <label for=""> Hình ảnh
-          <button class="uploadImage" data-select-images='true' value>Chọn tệp</button>
+          <button type="text" class="uploadImage" data-select-images='true'> Chọn tệp
+            <input type="hidden" value name="files">
+          </button>
         </label>
+        <input type="submit" value="Submit">
       </form>
     </div>
   </div>
-
-
-  <!-- <form action="./assets/php/upload.php" method="POST" enctype="multipart/form-data">
-    <input type="file" name="file[]" multiple>
-    <input type="submit" value="Submit">
-  </form> -->
 
   <script src="./assets/js/main.js"></script>
   <!-- <script src="./assets/js/handleEvent.js"></script> -->

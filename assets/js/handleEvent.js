@@ -278,7 +278,8 @@ window.addEventListener('DOMContentLoaded', function () {
             if (selectedImages.length > 0) {
                 console.log("Hình ảnh đã chọn: ", selectedImages);
                 window.opener.postMessage(selectedImages, "*");
-                cancelSelected();
+                // cancelSelected();
+                window.close();
             } else {
                 this.alert("Vui lòng chọn hình ảnh");
             }

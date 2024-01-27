@@ -2,6 +2,19 @@ window.addEventListener('DOMContentLoaded', function () {
     var selectBtn = document.querySelector('button[data-select-images="true"]');
     var newWindow; // Biến newWindow được khai báo ở mức độ phạm vi rộng
 
+    window.addEventListener("message", (event) => {
+        const receivedData = event.data;
+        // console.log("Received data from child window:", receivedData);
+
+        if (receivedData != null) {
+            var imageNames = receivedData.map(function (image) {
+                return image.name;
+            });
+
+            selectBtn.children[0].value = imageNames.join(", ");
+            console.log(selectBtn.value);
+        }
+    });
 
 
 
@@ -35,19 +48,4 @@ window.addEventListener('DOMContentLoaded', function () {
             }
         });
     };
-
-    window.addEventListener("message", (event) => {
-        const receivedData = event.data;
-        // console.log("Received data from child window:", receivedData);
-
-        if (receivedData != null) {
-            var imageNames = receivedData.map(function (image) {
-                return image.name;
-            });
-
-            selectBtn.value = imageNames.join(", ");
-            console.log(selectBtn.value);
-        }
-    });
-
 });
