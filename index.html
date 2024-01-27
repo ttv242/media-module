@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./assets/css/style.css">
+    <title>Media</title>
+</head>
+
+<body>
+
+    <div id="container" class="container">
+        <div class="header">
+            <div class="wrapper">
+                <div class="menu-wrapper">
+                    <div class="radio-inputs">
+                        <label class="radio">
+                            <input class="radio-input" type="radio" name="radio" checked="">
+                            <span class="name">Thư viện ảnh</span>
+                        </label>
+                        <label class="radio">
+                            <input class="radio-input" type="radio" name="radio">
+                            <span class="name">Tải ảnh</span>
+                        </label>
+
+                        <label class="radio">
+                            <input class="radio-input" type="radio" name="radio">
+                            <span class="name">Quản lý bộ nhớ</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="main">
+            <div class="content-wrapper">
+                <div class="media-library-content">
+                    <div class="list-media">
+                        <div class="title-list-media">
+                            <h3>
+                                Danh sách 
+                            </h3>
+                            <span class="count-selected">Đã chọn: <span class="quantity-images"></span> ảnh | <button class="cancelSelectedBtn">Bỏ chọn</button></span>
+                        </div>
+                        <div class="filter-media">
+                            <!-- <span>Đã chọn: </span> -->
+                        </div>
+
+                        <div class="list">
+                        </div>
+                    </div>
+                    <div class="action-media">
+                        <h3>Chi tiết đính kèm</h3>
+                        <div class="image-review">
+                            <img src="" alt="">
+                        </div>
+                        <div class="image-name" style="font-weight: bold;"></div>
+                        <div class="image-wh"></div>
+                        <div class="image-mime"></div>
+                        <div class="image-size"></div>
+                        <div class="action">
+                            <div class="image-delete">Xóa ảnh</div>
+                            <div class="image-selected">Chọn ảnh</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="upload-content">
+                    <div class="input-div">
+                        <input class="input" name="file" type="file" multiple>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" stroke-linejoin="round"
+                            stroke-linecap="round" viewBox="0 0 24 24" stroke-width="2" fill="none"
+                            stroke="currentColor" class="icon">
+                            <polyline points="16 16 12 12 8 16"></polyline>
+                            <line y2="21" x2="12" y1="12" x1="12"></line>
+                            <path d="M20.39 18.39A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.3"></path>
+                            <polyline points="16 16 12 12 8 16"></polyline>
+                        </svg>
+                    </div>
+                </div>
+
+                <div class="memoryManagement"></div>
+            </div>
+        </div>
+    </div>
+    </div>
+
+    <script src="./assets/js/handleEvent.js"></script>
+</body>
+
+</html>
