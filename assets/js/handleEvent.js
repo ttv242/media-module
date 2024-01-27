@@ -1,5 +1,20 @@
 window.addEventListener('DOMContentLoaded', function () {
+    var selectedImages = []; // Array to store selected images
+    window.eventHandle = {
+        fetchImageList: function () {
+            var storedData = localStorage.getItem('imageData');
 
+            // console.log(storedData);
+            if (storedData) {
+                var data = JSON.parse(storedData);
+                data.forEach(function (image) {
+                    loadImage(image);
+                });
+            } else {
+                console.log('No image data found in localStorage');
+            }
+        }
+    };
 
     // Menu window media module
     let contentWrapper = document.querySelector(".content-wrapper");
@@ -158,22 +173,7 @@ window.addEventListener('DOMContentLoaded', function () {
 
 
 
-    var selectedImages = []; // Array to store selected images
-    window.eventHandle = {
-        fetchImageList: function () {
-            var storedData = localStorage.getItem('imageData');
-
-            // console.log(storedData);
-            if (storedData) {
-                var data = JSON.parse(storedData);
-                data.forEach(function (image) {
-                    loadImage(image);
-                });
-            } else {
-                console.log('No image data found in localStorage');
-            }
-        }
-    };
+    
 
     var countSelectedElement = document.querySelector(".count-selected");
     var quantityImagesElement = document.querySelector(".quantity-images");
