@@ -350,3 +350,7 @@ html {
     opacity: 1;
   }
 }
+
+.memoryManagement {
+  display: none;
+}

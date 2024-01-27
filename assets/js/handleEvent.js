@@ -1,30 +1,11 @@
 window.addEventListener('DOMContentLoaded', function () {
+    var totalSize = 0;
     var selectedImages = []; // Array to store selected images
     var storedData;
-    // window.eventHandle = {
-    //     fetchImageList: function () {
-    //         var storedData = window.localStorage.getItem('imageData');
-
-    //         // console.log(storedData);
-    //         if (storedData) {
-    //             var data = JSON.parse(storedData);
-    //             data.forEach(function (image) {
-    //                 loadImage(image);
-    //             });
-    //         } else {
-    //             console.log('No image data found in localStorage');
-    //         }
-    //     }
-    // };
 
     function loadImage(image) {
-        var list = document.querySelector('.list');
 
-        // if (imagesAll.length > 0) {
-        //     imagesAll.forEach((e) => {
-        //         e.remove();
-        //     });
-        // };
+        var list = document.querySelector('.list');
 
         var imageElement = document.createElement('img');
         imageElement.crossOrigin = 'anonymous';
@@ -35,8 +16,9 @@ window.addEventListener('DOMContentLoaded', function () {
         imageElement.dataset.height = image.height;
         imageElement.dataset.mime = image.mime;
         imageElement.dataset.size = image.size;
-        list.appendChild(imageElement);
 
+
+        list.appendChild(imageElement);
         // Click event handler for the created image
         imageElement.addEventListener('click', function (e) {
             var imageReview = document.querySelector(".image-review img");
@@ -83,9 +65,6 @@ window.addEventListener('DOMContentLoaded', function () {
     };
 
 
-
-
-
     // Menu window media module
     let contentWrapper = document.querySelector(".content-wrapper");
     let imageSelectedBtn = document.querySelector(".action-media > .action > .image-selected");
@@ -110,6 +89,8 @@ window.addEventListener('DOMContentLoaded', function () {
     };
 
     var render = () => {
+        totalSize = 0;
+
         storedData = window.localStorage.getItem('imageData');
         // console.log(storedData);
 
@@ -135,6 +116,10 @@ window.addEventListener('DOMContentLoaded', function () {
 
                 function loadImageWithFade() {
                     if (fadeIndex < data.length) {
+
+                        // console.log(parseInt(data[fadeIndex].size));
+                        handleMemory(parseInt(data[fadeIndex].size));
+
                         loadImage(data[fadeIndex]);
                         fadeIndex++;
                         setTimeout(loadImageWithFade, fadeDelay);
@@ -175,7 +160,7 @@ window.addEventListener('DOMContentLoaded', function () {
                     contentWrapper.children[index + 1].classList.remove("displayFlex");
 
                     contentWrapper.children[index + 2].classList.remove("displayBlock");
-                    contentWrapper.children[index + 2].classList.remove("displayFlex");
+                    // contentWrapper.children[index + 2].classList.remove("displayFlex");
 
                     render();
                 } else if (e.target.checked && index === 1) {
@@ -186,16 +171,18 @@ window.addEventListener('DOMContentLoaded', function () {
                     contentWrapper.children[index - 1].classList.remove("displayFlex");
 
                     contentWrapper.children[index + 1].classList.remove("displayBlock");
-                    contentWrapper.children[index + 1].classList.remove("displayFlex");
+                    // contentWrapper.children[index + 1].classList.remove("displayFlex");
                 } else if (e.target.checked && index === 2) {
-                    contentWrapper.children[index].classList.remove("displayBlock");
-                    contentWrapper.children[index].classList.remove("displayFlex");
+                    contentWrapper.children[index].classList.add("displayBlock");
+                    // contentWrapper.children[index].classList.add("displayFlex");
 
                     contentWrapper.children[index - 1].classList.remove("displayBlock");
                     contentWrapper.children[index - 1].classList.remove("displayFlex");
 
                     contentWrapper.children[index - 2].classList.remove("displayBlock");
                     contentWrapper.children[index - 2].classList.remove("displayFlex");
+
+                    render();
                 }
             });
         });
@@ -352,9 +339,24 @@ window.addEventListener('DOMContentLoaded', function () {
             countSelectedElement.style.display = 'none';
         }
     }
-    // Open a new window and call the fetchImageList function
-    // newWindow = window.open('', '_blank');
 
+
+    function handleMemory(size) {
+        var usedMemoryValue = document.querySelector(".used-memory-value");
+        totalSize += size;
+        var formattedSize;
+
+        if (totalSize >= 1024 * 1024 * 1024) {
+            formattedSize = (totalSize / (1024 * 1024 * 1024)).toFixed(2) + " GB";
+        } else if (totalSize >= 1024 * 1024) {
+            formattedSize = (totalSize / (1024 * 1024)).toFixed(2) + " MB";
+        } else {
+            formattedSize = (totalSize / 1024).toFixed(2) + " KB";
+        }
+
+        console.log(formattedSize);
+        usedMemoryValue.textContent = formattedSize;
+    }
 
 
 
