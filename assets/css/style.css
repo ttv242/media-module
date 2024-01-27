@@ -180,7 +180,7 @@ html {
 }
 
 .list-media .list {
-  display: flex;
+  /* display: flex; */
   flex-wrap: wrap;
   height: 100vh; /* Đặt chiều cao của phần tử chứa nội dung */
   overflow-y: auto; /* Tạo thanh cuộn dọc khi nội dung vượt quá chiều cao của phần tử */
