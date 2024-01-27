@@ -83,41 +83,6 @@ window.addEventListener('DOMContentLoaded', function () {
     };
 
 
-    function toggleActionMedia(status) {
-        if (status === true) {
-            actionMediaElements.forEach(function (element) {
-                toggleCountSelectedElement(true);
-
-                element.style.display = 'block';
-                if (element.tagName.toLowerCase() === 'img') {
-                    element.style.width = '100%';
-                    element.style.height = 'auto';
-                    element.style.padding = '1px';
-                }
-            });
-        } else if (status === false) {
-            actionMediaElements.forEach(function (element) {
-                element.style.display = 'none';
-                // countSelectedElement.style.display = 'none';
-                toggleCountSelectedElement(false);
-
-
-            });
-        }
-    }
-
-    function toggleCountSelectedElement(status) {
-        if (status === true) {
-            countSelectedElement.style.display = 'block';
-            quantityImagesElement.textContent = selectedImages.length;
-        } else if (status === false) {
-            countSelectedElement.style.display = 'none';
-        }
-    }
-    // Open a new window and call the fetchImageList function
-    // newWindow = window.open('', '_blank');
-
-
 
 
 
@@ -162,9 +127,21 @@ window.addEventListener('DOMContentLoaded', function () {
                 storedData = window.localStorage.getItem('imageData');
                 var data = JSON.parse(storedData);
                 destroyAllImagesElement();
-                data.forEach(function (image) {
-                    loadImage(image);
-                });
+
+                // Tạo hiệu ứng fade
+                var fadeDuration = 500; // Thời gian fade (ms)
+                var fadeDelay = 100; // Độ trễ giữa các hình ảnh fade (ms)
+                var fadeIndex = 0; // Chỉ số hiện tại của hình ảnh fade
+
+                function loadImageWithFade() {
+                    if (fadeIndex < data.length) {
+                        loadImage(data[fadeIndex]);
+                        fadeIndex++;
+                        setTimeout(loadImageWithFade, fadeDelay);
+                    }
+                }
+
+                loadImageWithFade();
             })
             .catch(error => console.error('Error:', error));
     }
@@ -328,22 +305,58 @@ window.addEventListener('DOMContentLoaded', function () {
     }
 
     let cancelSelected = () => {
-        cancelSelectedBtn.addEventListener("click", () => {
-            var imgMediaAll = document.querySelectorAll('.img-media');
-            // console.log(imgMediaAll);
-            imgMediaAll.forEach((e) => {
-                selectedImages.forEach((v) => {
-                    if (e.src == v.src) {
-                        // console.log(v.src);
-                        e.classList.remove('img-selected');
-                    };
-                });
+        imgMediaAll = document.querySelectorAll('.img-media');
+        // console.log(imgMediaAll);
+        imgMediaAll.forEach((e) => {
+            selectedImages.forEach((v) => {
+                if (e.src == v.src) {
+                    // console.log(v.src);
+                    e.classList.remove('img-selected');
+                };
             });
-
-            selectedImages = [];
-            countSelectedElement.style.display = 'none';
         });
+
+        selectedImages = [];
+        countSelectedElement.style.display = 'none';
+        toggleActionMedia(false);
     };
+
+    function toggleActionMedia(status) {
+        if (status === true) {
+            actionMediaElements.forEach(function (element) {
+                toggleCountSelectedElement(true);
+
+                element.style.display = 'block';
+                if (element.tagName.toLowerCase() === 'img') {
+                    element.style.width = '100%';
+                    element.style.height = 'auto';
+                    element.style.padding = '1px';
+                }
+            });
+        } else if (status === false) {
+            actionMediaElements.forEach(function (element) {
+                element.style.display = 'none';
+                // countSelectedElement.style.display = 'none';
+                toggleCountSelectedElement(false);
+
+
+            });
+        }
+    }
+
+    function toggleCountSelectedElement(status) {
+        if (status === true) {
+            countSelectedElement.style.display = 'block';
+            quantityImagesElement.textContent = selectedImages.length;
+        } else if (status === false) {
+            countSelectedElement.style.display = 'none';
+        }
+    }
+    // Open a new window and call the fetchImageList function
+    // newWindow = window.open('', '_blank');
+
+
+
 
     render();
 });
